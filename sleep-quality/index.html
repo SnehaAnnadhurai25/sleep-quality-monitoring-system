@@ -1,0 +1,1999 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sleep Quality Monitoring System | Sneha Annadhurai</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080d18;
+    --surface: #101827;
+    --surface-light: #162235;
+    --border: rgba(255,255,255,0.09);
+
+    --text: #f3f6fc;
+    --muted: #9aa9bd;
+
+    --accent: #67d5ff;
+    --accent2: #8b9dff;
+    --green: #5de0b5;
+    --orange: #ffb86c;
+
+    --radius: 22px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+.container {
+    width: min(1150px, 90%);
+    margin: auto;
+}
+
+.section {
+    padding: 90px 0;
+}
+
+.section-label {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+
+.section-description {
+    color: var(--muted);
+    max-width: 1100px;
+    margin-bottom: 40px;
+    text-align:justify;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: rgba(103,213,255,0.3);
+    transform: translateY(-4px);
+}
+
+.card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.icon {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(8,13,24,0.88);
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.back-link {
+    border: 1px solid var(--border);
+    padding: 9px 15px;
+    border-radius: 30px;
+}
+
+/* HERO */
+
+.hero {
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    width: 500px;
+    height: 500px;
+
+    background: rgba(55,130,255,0.08);
+    filter: blur(100px);
+    border-radius: 50%;
+
+    top: -150px;
+    right: -150px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    border: 1px solid rgba(103,213,255,0.3);
+    background: rgba(103,213,255,0.08);
+
+    color: var(--accent);
+    padding: 8px 14px;
+    border-radius: 30px;
+
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+}
+
+.hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(38px, 5.5vw, 65px);
+    line-height: 1.12;
+    margin-bottom: 24px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 550px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 13px 22px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #62d5ff, #91a4ff);
+    color: #08111e;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+}
+
+.hero-image {
+    position: relative;
+}
+
+.hero-image img {
+    height: 430px;
+    border-radius: 25px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+
+    padding: 18px;
+    background: rgba(8,13,24,0.88);
+    backdrop-filter: blur(10px);
+
+    border-radius: 15px;
+    border: 1px solid var(--border);
+}
+
+.image-caption h3 {
+    font-size: 15px;
+}
+
+.image-caption p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* PROJECT OVERVIEW */
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 22px;
+}
+
+/* TECHNOLOGY */
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.tech-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    padding: 25px 20px;
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.tech-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.tech-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.tech-card h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.tech-card p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* WORKFLOW */
+
+.workflow {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.workflow-step {
+    text-align: center;
+    padding: 28px 20px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+.step-number {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+    background: rgba(103,213,255,0.12);
+    color: var(--accent);
+
+    font-weight: 700;
+}
+
+.workflow-step h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.workflow-step p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ALERT SYSTEM */
+
+.alert-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 22px;
+}
+
+.alert-card {
+    padding: 30px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+.alert-card h3 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.alert-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.alert-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.alert-local {
+    border-color: rgba(255,184,108,0.25);
+}
+
+.alert-cloud {
+    border-color: rgba(103,213,255,0.25);
+}
+
+/* VIDEO */
+
+.video-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 15px;
+    overflow: hidden;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.video-container video {
+    width: 100%;
+    max-height: 400px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
+    background: #000;
+    object-fit: contain;
+}
+
+/* GALLERY */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+}
+
+.gallery-item img {
+    height: 250px;
+    transition: transform 0.5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+.gallery-caption {
+    padding: 16px;
+}
+
+.gallery-caption h3 {
+    font-size: 14px;
+}
+
+.gallery-caption p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    background: #0c1422;
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 30px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+}
+
+.sample-label {
+    background: rgba(255,196,90,0.1);
+    border: 1px solid rgba(255,196,90,0.25);
+    color: #ffc45a;
+
+    border-radius: 30px;
+    padding: 7px 12px;
+    font-size: 11px;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+}
+
+.metric {
+    background: var(--surface-light);
+    padding: 25px;
+    border-radius: 18px;
+}
+
+.metric-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.metric-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    margin: 12px 0;
+}
+
+.metric-status {
+    color: var(--green);
+    font-size: 12px;
+}
+
+.chart-card {
+    margin-top: 20px;
+    background: var(--surface-light);
+    padding: 25px;
+    border-radius: 18px;
+}
+
+.chart-card h3 {
+    margin-bottom: 20px;
+}
+
+.chart {
+    width: 100%;
+    height: 180px;
+}
+
+.chart-line {
+    stroke: var(--accent);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+
+    animation: draw 3s ease forwards;
+}
+
+.chart-area {
+    fill: url(#chartGradient);
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* RESEARCH */
+
+.research-card {
+    background: linear-gradient(
+        135deg,
+        rgba(103,213,255,0.08),
+        rgba(139,157,255,0.08)
+    );
+
+    border: 1px solid rgba(103,213,255,0.2);
+    border-radius: 24px;
+    padding: 40px;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.research-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.research-item h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.research-item p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* FUTURE */
+
+.future-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.future-card {
+    padding: 25px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.future-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.future-card p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* LIGHTBOX */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+
+    background: rgba(0,0,0,0.92);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 15px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+
+    background: transparent;
+    border: none;
+    color: white;
+
+    font-size: 35px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+footer a {
+    color: var(--accent);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .hero-image img {
+        height: 350px;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .workflow {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .future-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .section {
+        padding: 65px 0;
+    }
+
+    .nav-links {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .nav-links .nav-section-link {
+        display: none;
+    }
+
+    .hero {
+        padding: 65px 0;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+    }
+
+    .hero-image img {
+        height: 280px;
+    }
+
+    .overview-grid,
+    .alert-grid,
+    .research-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img {
+        height: 240px;
+    }
+
+    .workflow {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard {
+        padding: 18px;
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .research-card {
+        padding: 25px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <div class="container nav-inner">
+
+        <a href="index.html" class="logo">
+            Sneha<span>.</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="#overview" class="nav-section-link">
+                Overview
+            </a>
+
+            <a href="#working" class="nav-section-link">
+                Working
+            </a>
+
+            <a href="#gallery" class="nav-section-link">
+                Gallery
+            </a>
+
+            <a href="#demo" class="nav-section-link">
+                Demo
+            </a>
+
+            <a href="index.html" class="back-link">
+                ← Portfolio
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                IoT · Healthcare Technology
+            </div>
+
+            <h1>
+                Sleep Quality
+                <span>Monitoring</span>
+                System
+            </h1>
+
+            <p class="hero-description">
+
+                An IoT-based system that monitors heart rate,
+                oxygen saturation and body movement using
+                physiological sensors, with real-time data
+                visualization and alert functionality through
+                Arduino Cloud.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#demo" class="btn btn-primary">
+                    ▶ Watch Demo
+                </a>
+
+                <a href="#working" class="btn btn-secondary">
+                    Explore Working ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-image">
+
+            <img
+                src="assets/sleep-project-hero.jpeg"
+                alt="Sleep monitoring hardware prototype"
+            >
+
+            <div class="image-caption">
+
+                <h3>IoT Monitoring Prototype</h3>
+
+                <p>
+                    ESP32 · MAX30100 · ADXL335 · Arduino Cloud
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OVERVIEW -->
+
+<section class="section" id="overview">
+
+    <div class="container">
+
+        <div class="section-label">
+            Project Overview
+        </div>
+
+        <h2 class="section-title">
+            Monitoring physiological activity through IoT
+        </h2>
+
+        <p class="section-description">
+
+            The system integrates heartbeat and motion sensors
+            with an ESP32 microcontroller to monitor physiological
+            parameters. Sensor data is transmitted to Arduino Cloud,
+            allowing users to remotely view heartbeat, SpO₂ and
+            movement information through a mobile interface.
+            A buzzer provides an audible alert when movement
+            is detected according to the programmed condition.
+
+        </p>
+
+
+        <div class="overview-grid">
+
+            <div class="card">
+
+                <div class="icon">🎯</div>
+
+                <h3>Project Objective</h3>
+
+                <p>
+
+                    To monitor heart rate, oxygen saturation
+                    and body movement during sleep using
+                    sensor technology and IoT connectivity,
+                    while providing accessible monitoring
+                    and alert mechanisms.
+
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">💡</div>
+
+                <h3>Proposed Solution</h3>
+
+                <p>
+
+                    The MAX30100 sensor measures heart rate
+                    and SpO₂ through fingertip sensing,
+                    while the ADXL335 detects body movement.
+                    ESP32 processes the sensor information
+                    and transmits the data to Arduino Cloud.
+
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📱</div>
+
+                <h3>Remote Monitoring</h3>
+
+                <p>
+
+                    Arduino Cloud enables users to monitor
+                    heart rate, SpO₂ and movement information
+                    through a mobile phone, providing
+                    convenient access to the collected data.
+
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🔔</div>
+
+                <h3>Alert Mechanism</h3>
+
+                <p>
+
+                    When movement is detected according
+                    to the system's programmed condition,
+                    a buzzer produces an audible alert.
+                    The configured cloud alert system
+                    can also notify the user through
+                    the connected mobile interface.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TECHNOLOGIES -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            Technologies
+        </div>
+
+        <h2 class="section-title">
+            Hardware & Technology Stack
+        </h2>
+
+        <p class="section-description">
+
+            Sensor integration, embedded processing,
+            wireless communication and cloud monitoring.
+
+        </p>
+
+
+        <div class="tech-grid">
+
+            <div class="tech-card">
+
+                <div class="tech-icon">⚡</div>
+
+                <h3>ESP32</h3>
+
+                <p>Microcontroller & Wi-Fi Connectivity</p>
+
+            </div>
+
+
+            <div class="tech-card">
+
+                <div class="tech-icon">❤️</div>
+
+                <h3>MAX30100</h3>
+
+                <p>Heart Rate & SpO₂ Measurement</p>
+
+            </div>
+
+
+            <div class="tech-card">
+
+                <div class="tech-icon">📡</div>
+
+                <h3>ADXL335</h3>
+
+                <p>Body Movement Detection</p>
+
+            </div>
+
+
+            <div class="tech-card">
+
+                <div class="tech-icon">☁️</div>
+
+                <h3>Arduino Cloud</h3>
+
+                <p>Remote Data Monitoring & Alerts</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SYSTEM WORKING -->
+
+<section class="section" id="working">
+
+    <div class="container">
+
+        <div class="section-label">
+            System Workflow
+        </div>
+
+        <h2 class="section-title">
+            How the System Works
+        </h2>
+
+        <p class="section-description">
+
+            The system continuously collects sensor
+            information, processes it through ESP32,
+            and enables remote monitoring through
+            Arduino Cloud.
+
+        </p>
+
+
+        <div class="workflow">
+
+
+            <div class="workflow-step">
+
+                <div class="step-number">01</div>
+
+                <h3>Sensor Data Collection</h3>
+
+                <p>
+
+                    MAX30100 measures heart rate and
+                    SpO₂ through fingertip sensing.
+                    ADXL335 detects body movement.
+
+                </p>
+
+            </div>
+
+
+            <div class="workflow-step">
+
+                <div class="step-number">02</div>
+
+                <h3>ESP32 Processing</h3>
+
+                <p>
+
+                    ESP32 receives sensor measurements
+                    and processes the collected data
+                    according to the programmed logic.
+
+                </p>
+
+            </div>
+
+
+            <div class="workflow-step">
+
+                <div class="step-number">03</div>
+
+                <h3>Cloud Communication</h3>
+
+                <p>
+
+                    Sensor information is transmitted
+                    through Wi-Fi to Arduino Cloud
+                    for remote monitoring.
+
+                </p>
+
+            </div>
+
+
+            <div class="workflow-step">
+
+                <div class="step-number">04</div>
+
+                <h3>Mobile Monitoring</h3>
+
+                <p>
+
+                    Heart rate, SpO₂ and movement data
+                    can be viewed through the Arduino
+                    Cloud mobile interface.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ALERT SYSTEM -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            Alert & Notification System
+        </div>
+
+        <h2 class="section-title">
+            Local and Remote Alerts
+        </h2>
+
+        <p class="section-description">
+
+            The system provides an alert mechanism
+            through the hardware and cloud platform
+            to support convenient monitoring.
+
+        </p>
+
+
+        <div class="alert-grid">
+
+
+            <div class="alert-card alert-local">
+
+                <div class="alert-icon">🔊</div>
+
+                <h3>Audible Buzzer Alert</h3>
+
+                <p>
+
+                    When body movement is detected
+                    according to the programmed
+                    condition, the buzzer generates
+                    an audible alert, providing
+                    immediate feedback from the
+                    hardware system.
+
+                </p>
+
+            </div>
+
+
+            <div class="alert-card alert-cloud">
+
+                <div class="alert-icon">📲</div>
+
+                <h3>Arduino Cloud Notification</h3>
+
+                <p>
+
+                    Sensor data is transmitted to
+                    Arduino Cloud. Users can monitor
+                    heartbeat, SpO₂ and movement
+                    information through the connected
+                    mobile interface and receive
+                    configured notifications.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DEMO -->
+
+<section class="section" id="demo">
+
+    <div class="container">
+
+        <div class="section-label">
+            Project Demonstration
+        </div>
+
+        <h2 class="section-title">
+            See the System in Action
+        </h2>
+
+        <p class="section-description">
+
+            Watch the sensor integration, data collection,
+            movement detection, buzzer alert and
+            Arduino Cloud monitoring process.
+
+        </p>
+
+
+        <div class="video-container">
+
+            <video controls poster="assets/project-thumbnail.png">
+
+                <source
+                    src="assets/sleep-demo.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video playback.
+
+            </video>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section class="section" id="gallery">
+
+    <div class="container">
+
+        <div class="section-label">
+            Project Gallery
+        </div>
+
+        <h2 class="section-title">
+            Inside the Prototype
+        </h2>
+
+        <p class="section-description">
+
+            Explore the hardware components,
+            sensor integration and system setup.
+
+        </p>
+
+
+        <div class="gallery-grid">
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="assets/project-prototype.png"
+                    alt="Complete sleep monitoring system prototype"
+                >
+
+                <div class="gallery-caption">
+
+                    <h3>Hardware Prototype</h3>
+
+                    <p>Complete monitoring system</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="assets/heartbeat-sensor.png"
+                    alt="MAX30100 sensor"
+                >
+
+                <div class="gallery-caption">
+
+                    <h3>Heartbeat Sensor</h3>
+
+                    <p>Heart rate and SpO₂ measurement</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="assets/motion-sensor.jpeg"
+                    alt="ADXL335 motion sensor"
+                >
+
+                <div class="gallery-caption">
+
+                    <h3>Motion Sensor</h3>
+
+                    <p>Body movement detection</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="assets/circuit-connections.jpeg"
+                    alt="Circuit connections"
+                >
+
+                <div class="gallery-caption">
+
+                    <h3>Circuit Connections</h3>
+
+                    <p>Sensor and ESP32 integration</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="assets/esp32-board.jpeg"
+                    alt="ESP32 microcontroller"
+                >
+
+                <div class="gallery-caption">
+
+                    <h3>ESP32 Controller</h3>
+
+                    <p>Data processing and Wi-Fi connectivity</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="assets/picture last.png"
+                    alt="Arduino Cloud project output"
+                >
+
+                <div class="gallery-caption">
+
+                    <h3>Cloud Monitoring</h3>
+
+                    <p>Sensor data visualization</p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            Data Visualization
+        </div>
+
+        <h2 class="section-title">
+            Monitoring Dashboard
+        </h2>
+
+        <p class="section-description">
+
+            The project uses Arduino Cloud to visualize
+            sensor information. The dashboard below
+            illustrates the type of data collected
+            by the system.
+
+        </p>
+
+
+        <div class="dashboard">
+
+            <div class="dashboard-header">
+
+                <h3>Sleep Monitoring Overview</h3>
+
+                <span class="sample-label">
+                    Sample Data · Illustrative
+                </span>
+
+            </div>
+
+
+            <div class="metric-grid">
+
+
+                <div class="metric">
+
+                    <div class="metric-label">
+                        Heart Rate
+                    </div>
+
+                    <div class="metric-value">
+                        78 <small>BPM</small>
+                    </div>
+
+                    <div class="metric-status">
+                        ♥ MAX30100
+                    </div>
+
+                </div>
+
+
+                <div class="metric">
+
+                    <div class="metric-label">
+                        SpO₂
+                    </div>
+
+                    <div class="metric-value">
+                        97 <small>%</small>
+                    </div>
+
+                    <div class="metric-status">
+                        ◉ MAX30100
+                    </div>
+
+                </div>
+
+
+                <div class="metric">
+
+                    <div class="metric-label">
+                        Body Movement
+                    </div>
+
+                    <div class="metric-value" style="font-size:24px;">
+                        Detected
+                    </div>
+
+                    <div class="metric-status">
+                        ↗ ADXL335
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <h3>Illustrative Heart Rate Trend</h3>
+
+                <svg
+                    class="chart"
+                    viewBox="0 0 800 200"
+                    preserveAspectRatio="none"
+                >
+
+                    <defs>
+
+                        <linearGradient
+                            id="chartGradient"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                        >
+
+                            <stop
+                                offset="0%"
+                                stop-color="#67d5ff"
+                                stop-opacity="0.25"
+                            />
+
+                            <stop
+                                offset="100%"
+                                stop-color="#67d5ff"
+                                stop-opacity="0"
+                            />
+
+                        </linearGradient>
+
+                    </defs>
+
+
+                    <line
+                        x1="0"
+                        y1="40"
+                        x2="800"
+                        y2="40"
+                        stroke="#26364c"
+                    />
+
+                    <line
+                        x1="0"
+                        y1="90"
+                        x2="800"
+                        y2="90"
+                        stroke="#26364c"
+                    />
+
+                    <line
+                        x1="0"
+                        y1="140"
+                        x2="800"
+                        y2="140"
+                        stroke="#26364c"
+                    />
+
+
+                    <path
+                        class="chart-area"
+                        d="
+                            M0 100
+                            L100 85
+                            L200 115
+                            L300 75
+                            L400 95
+                            L500 65
+                            L600 100
+                            L700 70
+                            L800 90
+                            L800 200
+                            L0 200
+                            Z
+                        "
+                    />
+
+
+                    <path
+                        class="chart-line"
+                        d="
+                            M0 100
+                            L100 85
+                            L200 115
+                            L300 75
+                            L400 95
+                            L500 65
+                            L600 100
+                            L700 70
+                            L800 90
+                        "
+                    />
+
+                </svg>
+
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    color:var(--muted);
+                    font-size:12px;
+                ">
+
+                    <span>10 PM</span>
+                    <span>11 PM</span>
+                    <span>12 AM</span>
+                    <span>1 AM</span>
+                    <span>2 AM</span>
+                    <span>3 AM</span>
+                    <span>4 AM</span>
+
+                </div>
+
+            </div>
+
+
+            <p style="
+                color:var(--muted);
+                font-size:12px;
+                margin-top:20px;
+            ">
+
+                This dashboard is a visual representation
+                for portfolio demonstration. Actual sensor
+                readings are monitored through Arduino Cloud.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESEARCH -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            Research & Recognition
+        </div>
+
+        <h2 class="section-title">
+            Beyond the Project
+        </h2>
+
+
+        <div class="research-card">
+
+            <p style="color:var(--accent);font-size:13px;">
+                RESEARCH CONTRIBUTION
+            </p>
+
+
+            <h2 style="
+                font-family:'Space Grotesk',sans-serif;
+                font-size:28px;
+                margin-top:10px;
+            ">
+
+                Sleep Quality Monitoring
+                Using Heartbeat and Motion Sensor
+
+            </h2>
+
+
+            <div class="research-grid">
+
+
+                <div class="research-item">
+
+                    <h3>📄 Research Paper Accepted</h3>
+
+                    <p>
+
+                        Research paper accepted at
+                        ICICV 2026.
+
+                    </p>
+
+                    <p style="margin-top:10px;color:var(--accent);">
+
+                        Paper ID: ICICV-662
+
+                    </p>
+
+                </div>
+
+
+                <div class="research-item">
+
+                    <h3>🎤 Conference Presentation</h3>
+
+                    <p>
+
+                        Presented the research at
+                        ICICV 2026.
+
+                    </p>
+
+                    <p style="margin-top:10px;color:var(--accent);">
+
+                        20–22 May 2026
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FUTURE SCOPE -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label">
+            Future Scope
+        </div>
+
+        <h2 class="section-title">
+            Future Enhancements
+        </h2>
+
+        <p class="section-description">
+
+            Building upon the existing IoT monitoring
+            system with advanced analysis and
+            intelligent capabilities.
+
+        </p>
+
+
+        <div class="future-grid">
+
+
+            <div class="future-card">
+
+                <div class="icon">🤖</div>
+
+                <h3>AI-Based Sleep Analysis</h3>
+
+                <p>
+
+                    Integrating machine learning algorithms
+                    to analyze physiological patterns
+                    and identify sleep-related trends.
+
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <div class="icon">📊</div>
+
+                <h3>Advanced Data Analytics</h3>
+
+                <p>
+
+                    Enhancing cloud-based visualization
+                    with historical data analysis,
+                    personalized insights and
+                    monitoring reports.
+
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <div class="icon">🔬</div>
+
+                <h3>Enhanced Monitoring</h3>
+
+                <p>
+
+                    Expanding the system with additional
+                    physiological sensors and improved
+                    monitoring capabilities for
+                    comprehensive sleep analysis.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <p>
+
+            Designed & Developed by
+            <a href="index.html">
+                Sneha Annadhurai
+            </a>
+
+        </p>
+
+        <p style="margin-top:10px;">
+
+            <a href="index.html">
+                ← Back to Portfolio
+            </a>
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- IMAGE LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+    <button
+        class="lightbox-close"
+        id="lightboxClose"
+        aria-label="Close image"
+    >
+        ×
+    </button>
+
+    <img
+        src=""
+        alt="Expanded project image"
+        id="lightboxImage"
+    >
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+const galleryImages = document.querySelectorAll(
+    ".gallery-item img"
+);
+
+const lightbox = document.getElementById("lightbox");
+
+const lightboxImage = document.getElementById(
+    "lightboxImage"
+);
+
+const lightboxClose = document.getElementById(
+    "lightboxClose"
+);
+
+
+galleryImages.forEach((image) => {
+
+    image.addEventListener("click", () => {
+
+        lightboxImage.src = image.src;
+
+        lightbox.classList.add("active");
+
+    });
+
+});
+
+
+lightboxClose.addEventListener("click", () => {
+
+    lightbox.classList.remove("active");
+
+});
+
+
+lightbox.addEventListener("click", (event) => {
+
+    if (event.target === lightbox) {
+
+        lightbox.classList.remove("active");
+
+    }
+
+});
+
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+
+        lightbox.classList.remove("active");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
